@@ -6,6 +6,7 @@ class AppStrings {
   static const String nameScreenTitle = "Enter Your Details";
   static const String wheelScreenTitle = "Select Number of Wheels";
   static const String vehicleTypeTitle = "Choose the Vehicle Type";
+  static const String modelTitle = "Choose the Specific Model";
 
   //Button Text
   static const String next = "Next";

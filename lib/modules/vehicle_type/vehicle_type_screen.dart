@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:vehicle_rental_app/core/resources/responsive.dart';
 import 'package:vehicle_rental_app/core/resources/string.dart';
-import 'package:vehicle_rental_app/modules/vehicle_type/vehicle_type_sample_data.dart';
+import 'package:vehicle_rental_app/modules/specific_model/specific_model_screen.dart';
+import 'package:vehicle_rental_app/modules/vehicle_type_sample_data.dart';
 
 import '../../widgets/bottom_button_layout.dart';
 import '../../widgets/custom_button.dart';
@@ -41,7 +42,7 @@ class _VehicleTypeScreenState extends State<VehicleTypeScreen> {
         onClick: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (_) => const VehicleTypeScreen()),
+            MaterialPageRoute(builder: (_) => SpecificModelScreen(vehicleTypeId: selectedVehicleId)),
           );
         },
       ),
@@ -74,13 +75,13 @@ class _VehicleTypeScreenState extends State<VehicleTypeScreen> {
   Widget _radioGroupLayout() {
     return Column(
       children:
-      vehicleTypeOptions.map((option) {
+      vehicleModels.map((option) {
         return CustomRadioTile<int>(
-          value: option.id,
+          value: option.typeId,
           groupValue: selectedVehicleId,
-          title: option.label,
+          title: option.name,
           onTap: () {
-            setState(() => selectedVehicleId = option.id);
+            setState(() => selectedVehicleId = option.typeId);
           },
         );
       }).toList(),

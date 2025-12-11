@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:vehicle_rental_app/core/resources/responsive.dart';
 import 'package:vehicle_rental_app/modules/vehicle_type/vehicle_type_screen.dart';
-import 'package:vehicle_rental_app/modules/wheel/wheel_sample_data.dart';
 import 'package:vehicle_rental_app/widgets/custom_radio_tile.dart';
 
 import '../../core/resources/string.dart';
 import '../../widgets/bottom_button_layout.dart';
 import '../../widgets/custom_button.dart';
+import '../vehicle_type_sample_data.dart';
 
 class WheelScreen extends StatefulWidget {
   const WheelScreen({super.key});
@@ -38,7 +38,9 @@ class _WheelScreenState extends State<WheelScreen> {
       bottomNavigationBar: bottomButtonLayout(
         context: appContext,
         customButtons: customButtons,
-        onClick: () {
+        onClick: selectedWheelId == null
+            ? null
+            : () {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (_) => const VehicleTypeScreen()),
