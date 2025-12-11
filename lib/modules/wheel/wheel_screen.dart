@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:vehicle_rental_app/core/resources/responsive.dart';
+import 'package:vehicle_rental_app/modules/vehicle_type/vehicle_type_screen.dart';
 import 'package:vehicle_rental_app/modules/wheel/wheel_sample_data.dart';
 import 'package:vehicle_rental_app/widgets/custom_radio_tile.dart';
 
+import '../../core/resources/string.dart';
 import '../../widgets/bottom_button_layout.dart';
 import '../../widgets/custom_button.dart';
 
@@ -30,7 +32,7 @@ class _WheelScreenState extends State<WheelScreen> {
             horizontal: appContext.widthPct(1),
             vertical: appContext.heightPct(8),
           ),
-          child: _radioGroupLayout(),
+          child: _mainView(),
         ),
       ),
       bottomNavigationBar: bottomButtonLayout(
@@ -39,7 +41,7 @@ class _WheelScreenState extends State<WheelScreen> {
         onClick: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (_) => const WheelScreen()),
+            MaterialPageRoute(builder: (_) => const VehicleTypeScreen()),
           );
         },
       ),
@@ -48,6 +50,25 @@ class _WheelScreenState extends State<WheelScreen> {
 
   void _initialiseViews() {
     customButtons = CustomButtons(appContext);
+  }
+
+  Widget _mainView() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          AppStrings.wheelScreenTitle,
+          style: TextStyle(
+            fontSize: appContext.textLargeTitle_20(),
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        SizedBox(height: appContext.heightPct(2)),
+        Expanded(
+          child: _radioGroupLayout(),
+        ),
+      ],
+    );
   }
 
   Widget _radioGroupLayout() {

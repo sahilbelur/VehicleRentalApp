@@ -1,33 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:vehicle_rental_app/core/resources/responsive.dart';
 import 'package:vehicle_rental_app/core/resources/string.dart';
-import 'package:vehicle_rental_app/widgets/bottom_button_layout.dart';
-import 'package:vehicle_rental_app/widgets/custom_button.dart';
+import 'package:vehicle_rental_app/modules/vehicle_type/vehicle_type_sample_data.dart';
 
-import '../../widgets/custom_text_field.dart';
-import '../wheel/wheel_screen.dart';
+import '../../widgets/bottom_button_layout.dart';
+import '../../widgets/custom_button.dart';
+import '../../widgets/custom_radio_tile.dart';
 
-class NameScreen extends StatefulWidget {
-  const NameScreen({super.key});
+
+class VehicleTypeScreen extends StatefulWidget {
+  const VehicleTypeScreen({super.key});
 
   @override
-  State<NameScreen> createState() => _NameScreenState();
+  State<VehicleTypeScreen> createState() => _VehicleTypeScreenState();
 }
 
-class _NameScreenState extends State<NameScreen> {
+class _VehicleTypeScreenState extends State<VehicleTypeScreen> {
   late BuildContext appContext;
-  late CustomTextFields customTextFields;
   late CustomButtons customButtons;
 
-  final TextEditingController firstNameController = TextEditingController();
-  final TextEditingController lastNameController = TextEditingController();
+  int? selectedVehicleId;
 
   @override
   Widget build(BuildContext context) {
     appContext = context;
     _initialiseViews();
     return Scaffold(
-      backgroundColor: Colors.white,
       body: Center(
         child: Padding(
           padding: EdgeInsets.symmetric(
@@ -43,7 +41,7 @@ class _NameScreenState extends State<NameScreen> {
         onClick: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (_) => const WheelScreen()),
+            MaterialPageRoute(builder: (_) => const VehicleTypeScreen()),
           );
         },
       ),
@@ -52,7 +50,6 @@ class _NameScreenState extends State<NameScreen> {
 
   void _initialiseViews() {
     customButtons = CustomButtons(appContext);
-    customTextFields = CustomTextFields(appContext);
   }
 
   Widget _mainView() {
@@ -60,7 +57,7 @@ class _NameScreenState extends State<NameScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          AppStrings.nameScreenTitle,
+          AppStrings.vehicleTypeTitle,
           style: TextStyle(
             fontSize: appContext.textLargeTitle_20(),
             fontWeight: FontWeight.bold,
@@ -68,25 +65,25 @@ class _NameScreenState extends State<NameScreen> {
         ),
         SizedBox(height: appContext.heightPct(2)),
         Expanded(
-          child: _textFieldLayout(),
+          child: _radioGroupLayout(),
         ),
       ],
     );
   }
 
-  Widget _textFieldLayout() {
+  Widget _radioGroupLayout() {
     return Column(
-      children: [
-        customTextFields.customisedTextField(
-          label: AppStrings.firstName,
-          controller: firstNameController,
-        ),
-        SizedBox(height: appContext.heightPct(1.5)),
-        customTextFields.customisedTextField(
-          label: AppStrings.lastName,
-          controller: lastNameController,
-        ),
-      ],
+      children:
+      vehicleTypeOptions.map((option) {
+        return CustomRadioTile<int>(
+          value: option.id,
+          groupValue: selectedVehicleId,
+          title: option.label,
+          onTap: () {
+            setState(() => selectedVehicleId = option.id);
+          },
+        );
+      }).toList(),
     );
   }
 }

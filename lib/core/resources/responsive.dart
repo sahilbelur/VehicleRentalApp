@@ -49,4 +49,7 @@ extension ResponsiveExtensions on BuildContext {
 
   double textMedium_18() =>
       _calculateFontSize(_isTablet ? 0.033 : 0.037);
+
+  double textLargeTitle_20() =>
+      _calculateFontSize(_isTablet ? 0.034 : 0.040);
 }
