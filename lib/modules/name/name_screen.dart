@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:vehicle_rental_app/core/resources/responsive.dart';
 import 'package:vehicle_rental_app/core/resources/string.dart';
+import 'package:vehicle_rental_app/widgets/bottom_button_layout.dart';
 import 'package:vehicle_rental_app/widgets/custom_button.dart';
 
-import '../widgets/custom_text_field.dart';
+import '../../widgets/custom_text_field.dart';
+import '../wheel/wheel_screen.dart';
 
 class NameScreen extends StatefulWidget {
   const NameScreen({super.key});
@@ -35,9 +37,19 @@ class _NameScreenState extends State<NameScreen> {
           child: _textFieldLayout(),
         ),
       ),
-        bottomNavigationBar: _bottomLayout(),
+      bottomNavigationBar: bottomButtonLayout(
+        context: appContext,
+        customButtons: customButtons,
+        onClick: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const WheelScreen()),
+          );
+        },
+      ),
     );
   }
+
   void _initialiseViews() {
     customButtons = CustomButtons(appContext);
     customTextFields = CustomTextFields(appContext);
@@ -47,36 +59,15 @@ class _NameScreenState extends State<NameScreen> {
     return Column(
       children: [
         customTextFields.customisedTextField(
-            label: AppStrings.firstName,
-            controller: firstNameController
+          label: AppStrings.firstName,
+          controller: firstNameController,
         ),
         SizedBox(height: appContext.heightPct(1.5)),
         customTextFields.customisedTextField(
-            label: AppStrings.lastName,
-            controller: lastNameController
-        )
+          label: AppStrings.lastName,
+          controller: lastNameController,
+        ),
       ],
-    );
-  }
-
-  Widget _bottomLayout() {
-    return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: appContext.marginDimen(),
-        vertical: appContext.heightPct(1),
-      ),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-          ),
-        ],
-      ),
-      child: customButtons.fullWidthButton(
-          btnText: AppStrings.next,
-          onPressed: (){}
-      ),
     );
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vehicle_rental_app/screens/name_screen.dart';
 import 'core/resources/custom_color.dart';
+import 'modules/name/name_screen.dart';
 
 
 void main() {

@@ -9,7 +9,7 @@ class CustomButtons {
 
   Widget fullWidthButton({
     required String btnText,
-    required VoidCallback onPressed,
+    required VoidCallback? onPressed,
     double? height,
     Color? backgroundColor,
     Color? borderColor,
@@ -37,7 +37,7 @@ class CustomButtons {
               btnText,
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: appContext.textNormal_16(),
+              fontSize: appContext.textMedium_18(),
               fontWeight: FontWeight.bold,
               color: textColor ?? CustomColor.white
             ),
