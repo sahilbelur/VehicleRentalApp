@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'core/resources/custom_color.dart';
-import 'modules/name/name_screen.dart';
+import 'modules/user_details/name_screen.dart';
 
 
 void main() {

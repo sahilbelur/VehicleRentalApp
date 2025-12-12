@@ -57,7 +57,6 @@ class _NameScreenState extends State<NameScreen> {
 
   Widget _mainView() {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           AppStrings.nameScreenTitle,

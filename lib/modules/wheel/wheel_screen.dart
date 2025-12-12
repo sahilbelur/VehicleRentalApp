@@ -6,7 +6,7 @@ import 'package:vehicle_rental_app/widgets/custom_radio_tile.dart';
 import '../../core/resources/string.dart';
 import '../../widgets/bottom_button_layout.dart';
 import '../../widgets/custom_button.dart';
-import '../vehicle_type_sample_data.dart';
+import '../sample_data/vehicle_type_sample_data.dart';
 
 class WheelScreen extends StatefulWidget {
   const WheelScreen({super.key});
@@ -43,7 +43,7 @@ class _WheelScreenState extends State<WheelScreen> {
             : () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (_) => const VehicleTypeScreen()),
+            MaterialPageRoute(builder: (_) => VehicleTypeScreen(selectedWheelId: selectedWheelId!,)),
           );
         },
       ),

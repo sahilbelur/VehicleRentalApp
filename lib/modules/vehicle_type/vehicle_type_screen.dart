@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:vehicle_rental_app/core/resources/responsive.dart';
 import 'package:vehicle_rental_app/core/resources/string.dart';
 import 'package:vehicle_rental_app/modules/specific_model/specific_model_screen.dart';
-import 'package:vehicle_rental_app/modules/vehicle_type_sample_data.dart';
+import 'package:vehicle_rental_app/modules/sample_data/vehicle_type_sample_data.dart';
+import 'package:vehicle_rental_app/modules/vehicle_type/vehicle_type_model.dart';
 
 import '../../widgets/bottom_button_layout.dart';
 import '../../widgets/custom_button.dart';
@@ -10,7 +11,8 @@ import '../../widgets/custom_radio_tile.dart';
 
 
 class VehicleTypeScreen extends StatefulWidget {
-  const VehicleTypeScreen({super.key});
+  final int selectedWheelId;
+  const VehicleTypeScreen({super.key, required this.selectedWheelId});
 
   @override
   State<VehicleTypeScreen> createState() => _VehicleTypeScreenState();
@@ -21,6 +23,7 @@ class _VehicleTypeScreenState extends State<VehicleTypeScreen> {
   late CustomButtons customButtons;
 
   int? selectedVehicleId;
+  late List<VehicleTypeModel> filteredTypes;
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +42,12 @@ class _VehicleTypeScreenState extends State<VehicleTypeScreen> {
       bottomNavigationBar: bottomButtonLayout(
         context: appContext,
         customButtons: customButtons,
-        onClick: () {
+        onClick: selectedVehicleId == null
+            ? null
+            : () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (_) => SpecificModelScreen(vehicleTypeId: selectedVehicleId)),
+            MaterialPageRoute(builder: (_) => SpecificModelScreen(vehiclevehicleTypeId: selectedVehicleId!)),
           );
         },
       ),
@@ -51,6 +56,10 @@ class _VehicleTypeScreenState extends State<VehicleTypeScreen> {
 
   void _initialiseViews() {
     customButtons = CustomButtons(appContext);
+    filteredTypes = vehicleTypes
+        .where((type) => type.wheelCount == widget.selectedWheelId)
+        .toList();
+
   }
 
   Widget _mainView() {
@@ -75,13 +84,13 @@ class _VehicleTypeScreenState extends State<VehicleTypeScreen> {
   Widget _radioGroupLayout() {
     return Column(
       children:
-      vehicleModels.map((option) {
+      filteredTypes.map((type) {
         return CustomRadioTile<int>(
-          value: option.typeId,
+          value: type.id,
           groupValue: selectedVehicleId,
-          title: option.name,
+          title: type.name,
           onTap: () {
-            setState(() => selectedVehicleId = option.typeId);
+            setState(() => selectedVehicleId = type.id);
           },
         );
       }).toList(),
