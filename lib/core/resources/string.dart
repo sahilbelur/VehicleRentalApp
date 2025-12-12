@@ -18,6 +18,7 @@ class AppStrings {
 
   //Button Text
   static const String next = "Next";
+  static const String done = "Done";
 
   //Error Text
   static const String emptyField = "This field cannot be empty";
