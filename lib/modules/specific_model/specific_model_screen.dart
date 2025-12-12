@@ -165,7 +165,7 @@ class _SpecificModelScreenState extends State<SpecificModelScreen> {
       print("Vehicle Saved: ID: ${v['id']}, Name: ${v['vehicleName']}, Type: ${v['vehicleType']}");
     }
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text("Vehicle Saved: Vehicle saved successfully")),
+      SnackBar(content: Text("Vehicle saved successfully")),
     );
   }
 }
