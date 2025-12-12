@@ -3,6 +3,7 @@ import 'package:path/path.dart';
 
 class DbInstance {
   DbInstance._privateConstructor();
+
   static final DbInstance instance = DbInstance._privateConstructor();
 
   static Database? _database;
@@ -18,20 +19,18 @@ class DbInstance {
     final dbPath = await getDatabasesPath();
     final path = join(dbPath, 'app_database.db');
 
-    return await openDatabase(
-      path,
-      version: 1,
-      onCreate: _onCreate,
-    );
+    return await openDatabase(path, version: 1, onCreate: _onCreate);
   }
 
   Future<void> _onCreate(Database db, int version) async {
     await db.execute('''
-      CREATE TABLE selected_vehicle (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        vehicleName TEXT,
-        vehicleModel TEXT
-      )
-    ''');
+    CREATE TABLE selected_vehicle (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      vehicleName TEXT,
+      vehicleType TEXT,
+      vehicleImage TEXT,
+      name TEXT
+    )
+  ''');
   }
 }

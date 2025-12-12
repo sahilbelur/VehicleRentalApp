@@ -44,57 +44,61 @@ final List<VehicleModel> vehicleModels = [
     id: 5,
     vehicleTypeId: 2,
     name: "Ather 450X",
-    image: "assets/sample_images/ather.png",
+    image: "assets/sample_images/ather.jpg",
   ),
-
-  // 4-Wheelers
   VehicleModel(
     id: 6,
     vehicleTypeId: 3,
     name: "Honda City",
-    image: "assets/sample_images/city.png",
+    image: "assets/sample_images/HondaCity.jpg",
   ),
   VehicleModel(
     id: 7,
     vehicleTypeId: 3,
     name: "Hyundai Verna",
-    image: "assets/sample_images/verna.png",
+    image: "assets/sample_images/HyundaiVerna.jpg",
   ),
   VehicleModel(
     id: 8,
     vehicleTypeId: 4,
     name: "Mahindra XUV700",
-    image: "assets/models/xuv700.png",
+    image: "assets/sample_images/xuv700.jpg",
   ),
   VehicleModel(
     id: 9,
     vehicleTypeId: 4,
     name: "Tata Nexon",
-    image: "assets/sample_images/nexon.png",
+    image: "assets/sample_images/nexon.jpg",
   ),
   VehicleModel(
     id: 10,
     vehicleTypeId: 5,
     name: "Maruti Swift",
-    image: "assets/sample_images/swift.png",
+    image: "assets/sample_images/swift.jpg",
   ),
   VehicleModel(
     id: 11,
     vehicleTypeId: 5,
     name: "Hyundai i20",
-    image: "assets/sample_images/i20.png",
+    image: "assets/sample_images/i20.jpg",
   ),
   VehicleModel(
     id: 12,
     vehicleTypeId: 5,
     name: "Tata Altroz",
-    image: "assets/sample_images/altroz.png",
+    image: "assets/sample_images/TataAltroz.jpg",
   ),
   VehicleModel(
     id: 13,
     vehicleTypeId: 1,
     name: "Yamaha MT15",
-    image: "assets/sample_images/r15.jpg",
+    image: "assets/sample_images/MT15.jpg",
+  ),
+  VehicleModel(
+    id: 14,
+    vehicleTypeId: 2,
+    name: "OLA 450X",
+    image: "assets/sample_images/ola.jpg",
   ),
 ];
 

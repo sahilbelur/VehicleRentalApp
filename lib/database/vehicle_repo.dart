@@ -2,7 +2,7 @@ import 'package:sqflite/sqflite.dart';
 import '../../../database/db_helper.dart';
 
 
-class VehicleDbRepository {
+class VehicleRepository {
   final dbInstance = DbInstance.instance;
 
   Future<int> insertSelectedVehicle(Map<String, dynamic> data) async {

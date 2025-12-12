@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'core/resources/custom_color.dart';
 import 'modules/user_details/name_screen.dart';
+import 'modules/view_model/booking_view_model.dart';
 
 
 void main() {
-  runApp(const MyApp());
+    runApp(
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => BookingViewModel()),
+        ],
+        child: const MyApp(),
+      ),
+    );
 }
 
 class MyApp extends StatelessWidget {

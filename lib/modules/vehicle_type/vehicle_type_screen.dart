@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:vehicle_rental_app/core/resources/responsive.dart';
 import 'package:vehicle_rental_app/core/resources/string.dart';
 import 'package:vehicle_rental_app/modules/specific_model/specific_model_screen.dart';
@@ -8,6 +9,7 @@ import 'package:vehicle_rental_app/modules/vehicle_type/vehicle_type_model.dart'
 import '../../widgets/bottom_button_layout.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_radio_tile.dart';
+import '../view_model/booking_view_model.dart';
 
 
 class VehicleTypeScreen extends StatefulWidget {
@@ -22,8 +24,9 @@ class _VehicleTypeScreenState extends State<VehicleTypeScreen> {
   late BuildContext appContext;
   late CustomButtons customButtons;
 
-  int? selectedVehicleId;
+  VehicleTypeModel? selectedVehicleType;
   late List<VehicleTypeModel> filteredTypes;
+  late var vm;
 
   @override
   Widget build(BuildContext context) {
@@ -42,13 +45,10 @@ class _VehicleTypeScreenState extends State<VehicleTypeScreen> {
       bottomNavigationBar: bottomButtonLayout(
         context: appContext,
         customButtons: customButtons,
-        onClick: selectedVehicleId == null
+        onClick: selectedVehicleType == null
             ? null
             : () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (_) => SpecificModelScreen(vehiclevehicleTypeId: selectedVehicleId!)),
-          );
+          _navigateToNextScreen();
         },
       ),
     );
@@ -59,12 +59,11 @@ class _VehicleTypeScreenState extends State<VehicleTypeScreen> {
     filteredTypes = vehicleTypes
         .where((type) => type.wheelCount == widget.selectedWheelId)
         .toList();
-
+    vm = appContext.read<BookingViewModel>();
   }
 
   Widget _mainView() {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           AppStrings.vehicleTypeTitle,
@@ -87,13 +86,23 @@ class _VehicleTypeScreenState extends State<VehicleTypeScreen> {
       filteredTypes.map((type) {
         return CustomRadioTile<int>(
           value: type.id,
-          groupValue: selectedVehicleId,
+          groupValue: selectedVehicleType?.id,
           title: type.name,
           onTap: () {
-            setState(() => selectedVehicleId = type.id);
+            setState(() => selectedVehicleType = type);
           },
         );
       }).toList(),
+    );
+  }
+
+  void _navigateToNextScreen() {
+    vm.setVehicleDetails(
+      vType: selectedVehicleType!.name,
+    );
+    Navigator.push(
+      appContext,
+      MaterialPageRoute(builder: (_) => SpecificModelScreen(vehiclevehicleTypeId: selectedVehicleType!.id)),
     );
   }
 }
